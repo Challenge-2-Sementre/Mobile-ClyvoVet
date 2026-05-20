@@ -1,0 +1,45 @@
+{
+  "name": "sprint1mobile-tasks",
+  "version": "1.0.0",
+  "description": "Aplicativo Mobile de Gestão de Tarefas com React Native e TypeScript",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "eject": "expo eject",
+    "test": "jest",
+    "lint": "eslint . --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "@expo/metro-runtime": "~3.1.3",
+    "@expo/webpack-config": "^19.0.0",
+    "@react-native-async-storage/async-storage": "1.18.2",
+    "@react-navigation/bottom-tabs": "^6.5.11",
+    "@react-navigation/native": "^6.1.9",
+    "@react-navigation/native-stack": "^6.10.0",
+    "expo": "^49.0.0",
+    "expo-constants": "~14.4.2",
+    "expo-status-bar": "~1.6.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.72.10",
+    "react-native-gesture-handler": "~2.12.0",
+    "react-native-reanimated": "~3.3.0",
+    "react-native-safe-area-context": "4.6.3",
+    "react-native-screens": "~3.22.0",
+    "react-native-web": "~0.19.6",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@react-native-community/eslint-config": "^3.2.0",
+    "@types/react": "~18.2.45",
+    "@types/react-native": "~0.73.0",
+    "babel-plugin-module-resolver": "^5.0.3",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "typescript": "~5.3.3"
+  },
+  "private": true
+}
