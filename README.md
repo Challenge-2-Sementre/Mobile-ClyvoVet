@@ -289,16 +289,9 @@ npm run lint
 - **Context API**: Gerenciamento de estado global
 - **Expo**: Plataforma de desenvolvimento
 
-## 👨‍💻 Autor
+## 👨‍💻 Integrantes
+RAFAEL KUBAGAWA RAMOS, RM565572, 2TDSPO
+VINICIUS SOTERAS BRAGA, RM566230, 2TDSPO
 
-Desenvolvido como parte do desafio de Sprint Mobile.
+## Video
 
-## 📄 Licença
-
-Este projeto está disponível sob a licença MIT.
-
----
-
-**Versão**: 1.0.0  
-**Última atualização**: May 19, 2026  
-**Status**: ✅ Funcional
