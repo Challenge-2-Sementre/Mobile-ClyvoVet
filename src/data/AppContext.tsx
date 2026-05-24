@@ -11,6 +11,7 @@ interface AppContextType {
   addPet: (petData: Omit<IPet, 'id' | 'createdAt' | 'updatedAt' | 'history' | 'vaccines' | 'medications' | 'healthIssues' | 'consultations'>) => Promise<void>;
   updatePet: (pet: IPet) => Promise<void>;
   deletePet: (petId: string) => Promise<void>;
+  clearAllPets: () => Promise<void>;
   loadPets: () => Promise<void>;
   getPetById: (petId: string) => IPet | undefined;
 }
@@ -25,8 +26,11 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   const loadPets = async () => {
     try {
       setLoading(true);
-      const savedPets = await storageService.getPets();
-      if (savedPets.length === 0) {
+      const [savedPets, hasPetsData] = await Promise.all([
+        storageService.getPets(),
+        storageService.hasPetsData(),
+      ]);
+      if (savedPets.length === 0 && !hasPetsData) {
         await storageService.savePets(samplePets);
         setPets(samplePets);
       } else {
@@ -89,6 +93,17 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }
   };
 
+  const clearAllPets = async () => {
+    try {
+      await storageService.clearAllPets();
+      setPets([]);
+    } catch (err) {
+      setError('Erro ao limpar pets');
+      console.error(err);
+      throw err;
+    }
+  };
+
   const getPetById = (petId: string) => {
     return pets.find(pet => pet.id === petId);
   };
@@ -106,6 +121,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         addPet,
         updatePet,
         deletePet,
+        clearAllPets,
         loadPets,
         getPetById,
       }}

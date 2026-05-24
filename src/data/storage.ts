@@ -25,6 +25,16 @@ export const storageService = {
     }
   },
 
+  hasPetsData: async (): Promise<boolean> => {
+    try {
+      const data = await AsyncStorage.getItem(PETS_KEY);
+      return data !== null;
+    } catch (error) {
+      console.error('Error checking pets data:', error);
+      return false;
+    }
+  },
+
   addPet: async (pet: IPet): Promise<void> => {
     try {
       const pets = await storageService.getPets();
@@ -63,7 +73,7 @@ export const storageService = {
 
   clearAllPets: async (): Promise<void> => {
     try {
-      await AsyncStorage.removeItem(PETS_KEY);
+      await storageService.savePets([]);
     } catch (error) {
       console.error('Error clearing pets:', error);
       throw error;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Switch, Alert } from 'react-native';
 import { storageService } from '@data/storage';
+import { useAppContext } from '@data/AppContext';
 import { Header } from '@components/Header';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
@@ -9,8 +10,10 @@ import { styles } from '../styles/SettingsScreen.styles';
 import { colors } from '@styles/colors';
 import { spacing } from '@styles/spacing';
 import { IAppSettings, ITutorProfile } from '@interfaces/Pet';
+import { confirmDestructiveAction } from '@/utils/confirmDestructiveAction';
 
 export const SettingsScreen: React.FC = () => {
+  const { clearAllPets } = useAppContext();
   const [settings, setSettings] = useState<IAppSettings>({
     theme: 'light',
     notificationsEnabled: true,
@@ -66,25 +69,19 @@ export const SettingsScreen: React.FC = () => {
   };
 
   const handleClearAllData = () => {
-    Alert.alert(
-      'Limpar todos os dados',
-      'Deseja remover todos os registros de pets? Essa ação não pode ser desfeita.',
-      [
-        { text: 'Cancelar', style: 'cancel' },
-        {
-          text: 'Limpar',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              await storageService.clearAllPets();
-              Alert.alert('Dados limpos', 'Todos os pets foram removidos.');
-            } catch (error) {
-              Alert.alert('Erro', 'Não foi possível limpar os dados.');
-            }
-          },
-        },
-      ]
-    );
+    confirmDestructiveAction({
+      title: 'Limpar todos os dados',
+      message: 'Deseja remover todos os registros de pets? Essa ação não pode ser desfeita.',
+      confirmText: 'Limpar',
+      onConfirm: async () => {
+        try {
+          await clearAllPets();
+          Alert.alert('Dados limpos', 'Todos os pets foram removidos.');
+        } catch (error) {
+          Alert.alert('Erro', 'Não foi possível limpar os dados.');
+        }
+      },
+    });
   };
 
   return (
@@ -197,4 +194,3 @@ export const SettingsScreen: React.FC = () => {
     </View>
   );
 };
-
