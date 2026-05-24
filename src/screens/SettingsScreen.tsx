@@ -4,6 +4,7 @@ import { storageService } from '@data/storage';
 import { Header } from '@components/Header';
 import { Button } from '@components/Button';
 import { Input } from '@components/Input';
+import { FAIcon, Icons } from '@components/FontAwesomeIcon';
 import { styles } from '../styles/SettingsScreen.styles';
 import { colors } from '@styles/colors';
 import { spacing } from '@styles/spacing';
@@ -171,9 +172,18 @@ export const SettingsScreen: React.FC = () => {
             <Text style={styles.description}>
               Aplicativo para organizar a saúde de pets, vacinas, medicamentos e consultas com persistência local.
             </Text>
-            <Text style={styles.featureItem}>✓ Cadastro de pets e histórico médico</Text>
-            <Text style={styles.featureItem}>✓ Agenda de vacinas e consultas</Text>
-            <Text style={styles.featureItem}>✓ Simulação de IA veterinária</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 4 }}>
+              <FAIcon icon={Icons.check} size={16} color={colors.primary} />
+              <Text style={[styles.featureItem, { marginLeft: 8 }]}>Cadastro de pets e histórico médico</Text>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 4 }}>
+              <FAIcon icon={Icons.check} size={16} color={colors.primary} />
+              <Text style={[styles.featureItem, { marginLeft: 8 }]}>Agenda de vacinas e consultas</Text>
+            </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginVertical: 4 }}>
+              <FAIcon icon={Icons.check} size={16} color={colors.primary} />
+              <Text style={[styles.featureItem, { marginLeft: 8 }]}>Simulação de IA veterinária</Text>
+            </View>
           </View>
         </View>
 

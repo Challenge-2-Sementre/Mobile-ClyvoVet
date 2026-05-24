@@ -11,6 +11,7 @@ import { VetAIScreen } from '@screens/VetAIScreen';
 import { SettingsScreen } from '@screens/SettingsScreen';
 import { colors } from '@styles/colors';
 import { typography } from '@styles/spacing';
+import { FAIcon, Icons } from '@components/FontAwesomeIcon';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -27,9 +28,11 @@ const PetsNavigator = () => (
   </Stack.Navigator>
 );
 
-const TabIcon: React.FC<{ label: string }> = ({ label }) => <>{label}</>;
+const TabIcon: React.FC<{ icon: any }> = ({ icon }) => (
+  <FAIcon icon={icon} size={24} />
+);
 
-const createTabIcon = (label: string) => () => <TabIcon label={label} />;
+const createTabIcon = (icon: any) => () => <TabIcon icon={icon} />;
 
 export const AppNavigator = () => (
   <AppProvider>
@@ -60,7 +63,7 @@ export const AppNavigator = () => (
           options={{
             title: 'Início',
             tabBarLabel: 'Início',
-            tabBarIcon: createTabIcon('🏡'),
+            tabBarIcon: createTabIcon(Icons.home),
           }}
         />
         <Tab.Screen
@@ -69,7 +72,7 @@ export const AppNavigator = () => (
           options={{
             title: 'Pets',
             tabBarLabel: 'Pets',
-            tabBarIcon: createTabIcon('🐾'),
+            tabBarIcon: createTabIcon(Icons.paw),
           }}
         />
         <Tab.Screen
@@ -78,7 +81,7 @@ export const AppNavigator = () => (
           options={{
             title: 'Vet AI',
             tabBarLabel: 'Vet AI',
-            tabBarIcon: createTabIcon('🤖'),
+            tabBarIcon: createTabIcon(Icons.robot),
           }}
         />
         <Tab.Screen
@@ -87,7 +90,7 @@ export const AppNavigator = () => (
           options={{
             title: 'Configurações',
             tabBarLabel: 'Configurações',
-            tabBarIcon: createTabIcon('⚙️'),
+            tabBarIcon: createTabIcon(Icons.cog),
           }}
         />
       </Tab.Navigator>

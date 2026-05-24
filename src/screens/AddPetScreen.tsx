@@ -65,7 +65,7 @@ export const AddPetScreen: React.FC<AddPetScreenProps> = ({ navigation }) => {
       });
 
       Alert.alert('Pet cadastrado', 'O pet foi adicionado com sucesso.', [
-        { text: 'OK', onPress: () => navigation.goBack() },
+        { text: 'OK', onPress: () => navigation.navigate('Pets') },
       ]);
     } catch (error) {
       Alert.alert('Erro', 'Não foi possível salvar o pet. Tente novamente.');

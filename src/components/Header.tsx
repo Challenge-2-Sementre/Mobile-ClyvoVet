@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { styles } from '../styles/Header.styles';
+import { FAIcon, Icons } from './FontAwesomeIcon';
 
 interface HeaderProps {
   title: string;
@@ -21,7 +22,7 @@ export const Header: React.FC<HeaderProps> = ({
         <View style={styles.leftContainer}>
           {showBackButton && (
             <TouchableOpacity onPress={onBackPress} style={styles.backButton}>
-              <Text style={styles.backButtonText}>←</Text>
+              <FAIcon icon={Icons.arrowLeft} size={24} />
             </TouchableOpacity>
           )}
         </View>

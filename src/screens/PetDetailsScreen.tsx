@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Alert } from 'react-native';
 import { useAppContext } from '@data/AppContext';
 import { Header } from '@components/Header';
+import { Button } from '@components/Button';
 import { styles } from '../styles/PetDetailsScreen.styles';
 
 interface PetDetailsScreenProps {
@@ -11,7 +12,7 @@ interface PetDetailsScreenProps {
 
 export const PetDetailsScreen: React.FC<PetDetailsScreenProps> = ({ navigation, route }) => {
   const { petId } = route.params;
-  const { getPetById } = useAppContext();
+  const { getPetById, deletePet } = useAppContext();
   const pet = getPetById(petId);
 
   if (!pet) {
@@ -25,6 +26,28 @@ export const PetDetailsScreen: React.FC<PetDetailsScreenProps> = ({ navigation, 
       </View>
     );
   }
+
+  const handleDeletePet = () => {
+    Alert.alert(
+      'Excluir pet',
+      'Tem certeza que deseja excluir este pet? Essa ação não pode ser desfeita.',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Excluir',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await deletePet(pet.id);
+              navigation.navigate('Pets');
+            } catch (error) {
+              Alert.alert('Erro', 'Não foi possível excluir o pet. Tente novamente.');
+            }
+          },
+        },
+      ]
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -51,6 +74,10 @@ export const PetDetailsScreen: React.FC<PetDetailsScreenProps> = ({ navigation, 
           title="Consultas"
           items={pet.consultations.map(c => `${new Date(c.date).toLocaleDateString('pt-BR')} • ${c.reason} • ${c.veterinarian}`)}
         />
+
+        <View style={{ marginTop: 24 }}>
+          <Button title="Excluir pet" variant="danger" onPress={handleDeletePet} />
+        </View>
       </ScrollView>
     </View>
   );
